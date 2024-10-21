@@ -61,6 +61,17 @@ services:
       - es_data:/usr/share/elasticsearch/data
       - ./elasticsearch/v8/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
 
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    command:
+      - tunnel
+      - --no-autoupdate
+      - run
+      - --token
+    environment:
+      - TUNNEL_TOKEN=XXX
+    restart: unless-stopped
+
 volumes:
   growi_data:
   mongo_configdb:
